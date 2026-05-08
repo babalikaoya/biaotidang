@@ -16,7 +16,27 @@
       "Bash(vercel --version)",
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(npm root *)",
+      "Read(//c/Users/Admin/AppData/Roaming/npm/**)",
+      "Read(//c/Users/Admin/AppData/Roaming/npm/node_modules/vercel/**)",
+      "Bash(export PATH=\"$PATH:/c/Users/Admin/AppData/Roaming/npm\")",
+      "Bash(vercel whoami *)",
+      "Bash(winget install *)",
+      "Bash(export PATH=\"$PATH:$HOME/AppData/Local/Programs/gh/bin\")",
+      "Read(//c/Program Files/GitHub CLI//**)",
+      "Read(//c/Program Files \\(x86\\)/**)",
+      "Bash(export PATH=\"$PATH:/c/Program Files/GitHub CLI\")",
+      "Bash(gh auth *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(git config *)",
+      "Bash(git ls-remote *)",
+      "Bash(ssh *)",
+      "Bash(rm -f /c/Users/Admin/Desktop/biaotidang.zip)",
+      "Bash(zip -r /c/Users/Admin/Desktop/biaotidang.zip src/ .gitignore next.config.ts package.json package-lock.json postcss.config.mjs tsconfig.json -x 'src/**/*.ts' 'src/**/*.tsx' 'src/**/*.css' -x 'src/**/*')",
+      "Bash(powershell *)",
+      "Bash(git -c http.version=HTTP/1.1 -c http.postBuffer=524288000 push -u origin main)"
     ]
   }
 }
