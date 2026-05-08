@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欢迎</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            overflow: hidden;
+        }
+
+        /* 背景粒子 */
+        .particles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 50%;
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 20px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            color: #333;
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+            backdrop-filter: blur(4px);
+        }
+
+        h1 {
+            font-size: 72px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 16px;
+            background: linear-gradient(to right, #333, #000, #555);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #444;
+            margin-bottom: 48px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 48px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-outline {
+            margin-left: 16px;
+            color: #555;
+            background: transparent;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-outline:hover {
+            border-color: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        .footer {
+            margin-top: 64px;
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* 发光 orb */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(102, 126, 234, 0.08);
+            top: -100px;
+            right: -100px;
+            animation: orbMove1 8s ease-in-out infinite alternate;
+        }
+
+        .orb-2 {
+            width: 350px;
+            height: 350px;
+            background: rgba(118, 75, 162, 0.06);
+            bottom: -80px;
+            left: -80px;
+            animation: orbMove2 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes orbMove1 {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-80px, 80px); }
+        }
+
+        @keyframes orbMove2 {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(80px, -80px); }
+        }
+
+        @media (max-width: 640px) {
+            h1 { font-size: 42px; }
+            .subtitle { font-size: 16px; padding: 0 20px; }
+            .btn { display: block; width: 80%; margin: 12px auto; }
+            .btn-outline { margin-left: auto; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 背景发光 -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <!-- 粒子 -->
+    <div class="particles" id="particles"></div>
+
+    <!-- 主要内容 -->
+    <div class="container">
+        <div class="badge">✦ WELCOME</div>
+        <h1>欢迎来到 Demo</h1>
+        <p class="subtitle">一个简洁、优雅的欢迎页面<br>开启你的探索之旅</p>
+        <div>
+            <a href="#" class="btn btn-primary" onclick="handleClick(event)">开始体验</a>
+            <a href="#" class="btn btn-outline" onclick="handleClick(event)">了解更多</a>
+        </div>
+        <div class="footer">© 2026 · 用心打造</div>
+    </div>
+
+    <script>
+        // 粒子生成
+        const container = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const el = document.createElement('div');
+            el.className = 'particle';
+            el.style.left = Math.random() * 100 + '%';
+            el.style.width = el.style.height = (2 + Math.random() * 4) + 'px';
+            el.style.animationDuration = (6 + Math.random() * 10) + 's';
+            el.style.animationDelay = (Math.random() * 10) + 's';
+            container.appendChild(el);
+        }
+
+        function handleClick(e) {
+            e.preventDefault();
+            alert('欢迎！页面已准备就绪 🎉');
+        }
+    </script>
+</body>
+</html>

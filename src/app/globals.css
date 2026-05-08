@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+@theme {
+  --color-canvas: #f5f0e8;
+  --color-canvas-dark: #e8e0d0;
+  --color-card: #faf6f0;
+  --color-card-border: #d4c9b0;
+  --color-ochre: #c4903c;
+  --color-ochre-light: #d4a853;
+  --color-ochre-dark: #a07028;
+  --color-crimson: #8b2500;
+  --color-crimson-light: #b33000;
+  --color-ultramarine: #1b3a5c;
+  --color-ultramarine-light: #2a5a8a;
+  --color-forest: #2d5016;
+  --color-ink: #2c1810;
+  --color-ink-light: #5a3a2a;
+  --color-parchment: #f0e8d8;
+  --color-parchment-light: #f8f2e8;
+  --color-gold: #c4953c;
+  --font-serif: "Cormorant Garamond", "Georgia", serif;
+  --font-sans: "Inter", " system-ui", sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(196, 144, 60, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(139, 37, 0, 0.04) 0%, transparent 40%),
+      radial-gradient(ellipse at 50% 80%, rgba(27, 58, 92, 0.04) 0%, transparent 40%);
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .texture-bg {
+    position: relative;
+  }
+  .texture-bg::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+  .content-above {
+    position: relative;
+    z-index: 1;
+  }
+
+  .card-painting {
+    background: linear-gradient(135deg, var(--color-card), var(--color-parchment-light));
+    border: 1px solid var(--color-card-border);
+    border-radius: 2px;
+    box-shadow:
+      0 2px 8px rgba(44, 24, 16, 0.06),
+      0 1px 2px rgba(44, 24, 16, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  .card-painting:hover {
+    box-shadow:
+      0 4px 16px rgba(44, 24, 16, 0.1),
+      0 2px 4px rgba(44, 24, 16, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    border-color: var(--color-ochre-light);
+    transform: translateY(-1px);
+  }
+
+  .brush-stroke {
+    position: relative;
+  }
+  .brush-stroke::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      var(--color-ochre) 20%,
+      var(--color-crimson) 50%,
+      var(--color-ultramarine) 80%,
+      transparent 100%
+    );
+    opacity: 0.3;
+  }
+
+  .score-bar {
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--color-crimson), var(--color-ochre), var(--color-forest));
+    transition: width 0.6s ease;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--color-ochre-dark), var(--color-ochre));
+    color: white;
+    padding: 0.75rem 2rem;
+    border: none;
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(196, 144, 60, 0.3);
+  }
+  .btn-primary:hover {
+    background: linear-gradient(135deg, var(--color-ochre), var(--color-ochre-light));
+    box-shadow: 0 4px 16px rgba(196, 144, 60, 0.4);
+    transform: translateY(-1px);
+  }
+  .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--color-card-border);
+    color: var(--color-ink-light);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-ghost:hover {
+    border-color: var(--color-ochre);
+    color: var(--color-ochre-dark);
+  }
+
+  .input-painting {
+    background: var(--color-parchment-light);
+    border: 1px solid var(--color-card-border);
+    padding: 0.75rem 1rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+    width: 100%;
+  }
+  .input-painting:focus {
+    border-color: var(--color-ochre);
+    box-shadow: 0 0 0 3px rgba(196, 144, 60, 0.1);
+  }
+
+  .select-painting {
+    background: var(--color-parchment-light);
+    border: 1px solid var(--color-card-border);
+    padding: 0.75rem 1rem;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a3a2a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+  }
+  .select-painting:focus {
+    border-color: var(--color-ochre);
+    box-shadow: 0 0 0 3px rgba(196, 144, 60, 0.1);
+  }
+}
+
+@layer components {
+  @keyframes brushReveal {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0 0 0 0); }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes inkDrop {
+    0% { transform: scaleY(0); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: scaleY(1); opacity: 1; }
+  }
+  .animate-brush-reveal {
+    animation: brushReveal 0.8s ease-out forwards;
+  }
+  .animate-fade-in-up {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
+  .animate-ink-drop {
+    animation: inkDrop 0.6s ease-out forwards;
+  }
+}
